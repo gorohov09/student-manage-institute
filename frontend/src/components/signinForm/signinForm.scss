@@ -1,0 +1,42 @@
+.form{
+    padding-top: 50px;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 350px;
+    border: 0.25px solid #a890fd;
+    border-radius: 15px;
+
+    .input{
+        p {
+            font-size: 1em;
+            font-weight: 500;
+            color: white;
+        }
+
+        input[type=text] {
+            padding:5px; 
+            border:2px solid #ccc; 
+            -webkit-border-radius: 5px;
+            border-radius: 5px;
+        }
+        
+        input[type=text]:focus {
+            border-color:#333;
+        }
+
+        margin-bottom: 15px;
+    }
+    
+    .auth{
+        color: #ffffff;
+        font-size: 1em;
+    }
+
+    .button{
+        margin-top: 20px;
+    }
+}

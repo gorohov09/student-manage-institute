@@ -1,0 +1,72 @@
+.course {
+    display: flex;
+
+    .courseContainer {
+        flex: 6;
+
+        .singleCourse {
+            display: flex;
+            flex-direction: column;
+            padding: 40px;
+            justify-content: center;
+            
+            h2 {
+                font-size: 52px;
+                color: #6439ff;
+                font-weight: 700;
+                margin-bottom: 40px;
+            }
+
+            h3 {
+                margin-top: 20px;
+                color: #6439ff;
+            }
+
+            span {
+                font-size: 28px;
+                color: black;
+                font-weight: 500;
+                margin-top: 15px;
+            }
+
+            .dateCourse {
+                margin-top: 20px;
+                display: flex;
+                justify-content: space-between;
+                width: 700px;
+            }
+
+            .addLesson {
+                color: white;
+                background-color: #6439ff;
+                padding: 10px;
+                font-size: 15px;
+                border-radius: 20px;
+                margin-top: 20px;
+            }
+
+            .addModule {
+                color: white;
+                background-color: #6439ff;
+                padding: 10px;
+                font-size: 15px;
+                border-radius: 20px;
+            }
+
+            .lessons {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            a {
+                text-decoration: none;
+                margin-top: 15px;
+            }
+
+            .structureCourse {
+                margin-top: 20px;
+            }
+        }
+    }
+}

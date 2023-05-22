@@ -1,0 +1,38 @@
+.navbar {
+    height: 77px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #ffffff;
+    background:linear-gradient( var(--primary-color), var(--secondary--color));
+
+    .wrapper {
+        width: 100%;
+        padding: 0 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .logo{
+            color: #ffffff;
+            font-size: 30px;
+        }
+        .items {
+            display: flex;
+            align-items: center;
+
+            .item {
+                :hover{
+                    color: #6439ff;
+                }
+                display: flex;
+                align-items: center;
+                margin-right: 20px;
+                cursor: pointer;
+
+                .icon {
+                    font-size: 20px;
+                }
+            }
+        }
+    }
+}

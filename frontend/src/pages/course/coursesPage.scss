@@ -1,0 +1,52 @@
+.course {
+    display: flex;
+    flex-direction: row;
+
+    .left_side{
+        flex-basis: 20%;
+    }
+
+    .right_side{
+        .courseContainer {
+            flex: 6;
+    
+            .courses {
+                background: linear-gradient(120deg, #dcd3ff, #ffffff, #cbbdff);
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                padding: 20px;
+                justify-content: flex-start;
+                
+                .load, .operation {
+                    margin-bottom: 20px;
+                    margin-top: 20px;
+                    display: flex;
+                    justify-content: center;
+    
+                    span {
+                        font-size: 16px;
+                        color: #6439ff;
+                        font-weight: 700;
+                    }
+    
+                    .add {
+                        color: white;
+                        background-color: #6439ff;
+                        padding: 10px;
+                        border-radius: 10px;
+                    }
+    
+                    .add:hover {
+                        background-color: #7653f2;
+                    }
+    
+                    a {
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+    }
+    
+}

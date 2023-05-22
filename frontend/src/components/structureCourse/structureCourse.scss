@@ -1,0 +1,76 @@
+.structue_course_sidebar {
+    flex: 2;
+    border-right: 0.5px solid lightgray;
+    min-height: 100vh;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 10px;
+
+    .link_rating {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .star {
+            width: 30px;
+            height: 30px;
+            color: #ffd700;
+        }
+
+        h4 {
+            margin-top: 13px;
+        }
+
+        h4:hover {
+            color: #ffd700;
+        }
+    }
+
+    .progress {
+        height: 10px;
+        width: 200px;
+        border-radius: 30px;
+        background-color: rgb(232, 232, 232);
+        margin-bottom: 25px;
+    
+        &__inner {
+          height: 100%;
+          border-radius: 30px;
+          width: 80%;
+          background: rgb(18, 231, 48);
+          transition: all 0.3s ease-in-out;
+          background: linear-gradient(90deg, rgba(18, 231, 48, 1) 0%, rgba(0, 212, 255, 1) 100%);
+        }
+      }
+
+    h3 {
+        font-size: 25px;
+        font-weight: 700;
+        color: #6439ff;
+    }
+
+    h4 {
+        font-size: 19px;
+        font-weight: 500;
+        color: #6439ff;
+    }
+
+    .moduleButton {
+        text-decoration: none;
+        cursor: default;
+        font-size: 25px;
+        font-weight: 700;
+        color: #6439ff;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .lessonButton {
+        font-size: 22px;
+        font-weight: 700;
+        color: #6439ff;;
+    }
+}

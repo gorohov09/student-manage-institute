@@ -1,0 +1,47 @@
+.course {
+    margin-right: 20px;
+    width: 300px;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    padding: 10px;
+    -webkit-box-shadow: -2px -5px 8px 0px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: -2px -5px 8px 0px rgba(34, 60, 80, 0.2);
+    box-shadow: -2px -5px 8px 0px rgba(34, 60, 80, 0.2);
+    border-radius: 10px;
+    height: 300px;
+
+    .title {
+        font-weight: bold;
+        font-size: 18px;
+        color: rgb(160, 160, 160);
+    }
+
+    .link {
+        width: max-content;
+        font-size: 16px;
+        border-bottom: 1px solid gray;
+    }
+
+    img {
+        width: 150px;
+        height: 150px;
+    }
+
+    .left, .right {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .countStudents {
+            font-size: 30px;
+            font-weight: 700;
+            color: #6439ff;
+        }
+
+        .rating {
+            font-size: 20px;
+            font-weight: 400;
+        }
+    }
+}

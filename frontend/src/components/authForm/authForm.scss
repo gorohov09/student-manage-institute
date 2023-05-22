@@ -1,0 +1,41 @@
+.auth_form__container{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+    background:linear-gradient(120deg, #dcd3ff, #ffffff, #cbbdff);
+    z-index:-1;
+
+    .auth_form__form{
+        padding: 20px 0;
+        // background-color: #3d239b;
+        background: linear-gradient(#a890fd ,#6439ff);
+        flex-basis: 600px;
+        display:flex;
+        flex-direction: column;
+        align-items:center;
+        border-radius:10px;
+    }
+
+    .button_group{
+        display:flex;
+        align-items:flex-start;
+        justify-content: center;
+        margin: 20px 0;
+    }
+
+    
+
+    // .change_form{
+    //     // background-color:#5632d7;
+    //     color: white;
+        
+    // }
+    
+    
+}

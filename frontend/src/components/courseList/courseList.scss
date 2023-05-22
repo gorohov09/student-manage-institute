@@ -1,0 +1,19 @@
+.row {
+    background-color: #6439ff;
+    color: #6439ff;
+}
+
+.link {
+    text-decoration: none;
+    color: black;
+}
+
+.link:hover {
+    text-decoration: none;
+    color: #6439ff;
+}
+
+.course_list__container{
+    display:flex;
+    justify-content: center;
+}

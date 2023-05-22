@@ -1,0 +1,33 @@
+.lesson {
+    display: flex;
+
+    .lessonContainer {
+        flex: 6;
+
+        .addLesson {
+            display: flex;
+            flex-direction: column;
+            padding: 40px;
+            justify-content: center;
+            
+            h2 {
+                font-size: 52px;
+                color: #6439ff;
+                font-weight: 700;
+                margin-bottom: 60px;
+            }
+
+            span {
+                font-size: 20px;
+                color: #6439ff;
+                font-weight: 700;
+                margin-bottom: 15px;
+            }
+
+            .save {
+                width:fit-content;
+                align-self:center;
+            }
+        }
+    }
+}
