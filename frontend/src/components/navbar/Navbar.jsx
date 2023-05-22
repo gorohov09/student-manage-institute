@@ -1,7 +1,7 @@
-// import ManageSearchIcon from '@mui/icons-material/ManageSearch';
+import ManageSearchIcon from '@mui/icons-material/ManageSearch';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from "react-router-dom";
-import { Link } from 'react-router-dom'
+
 import "./navbar.scss"
 
 const Navbar = ({setIsAuth}) => {
@@ -17,9 +17,11 @@ const Navbar = ({setIsAuth}) => {
     return (
         <div className="navbar">
             <div className="wrapper">
-                <div className="top">
-                    <Link to="/" style={{'textDecoration':'none'}}><span className="logo">По Шагам</span></Link>
+                <div className="search">
+                    <input type="text" placeholder="Поиск..."/>
+                    <ManageSearchIcon />
                 </div>
+
                 <div className="items">
                     <div onClick={handleAuth} className="item">
                         <LogoutIcon className='icon'/>

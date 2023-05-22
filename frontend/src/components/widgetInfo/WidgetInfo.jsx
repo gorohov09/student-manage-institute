@@ -9,14 +9,14 @@ const WidgetInfo = ({type}) => {
     switch (type) {
         case "students":
             data = {
-                title: "Кол-во ваших учеников",
+                title: "Общее кол-во студентов",
                 link: "Посмотреть всех",
                 icon: <PeopleIcon className="icon"/>
             };
             break;
-        case "courses":
+        case "groups":
             data = {
-                title: "Кол-во созданных вами курсов",
+                title: "Общее кол-во групп",
                 link: "Посмотреть все",
                 icon: <MenuBookIcon className="icon"/>
             }

@@ -14,7 +14,7 @@ const HomePage = ({setIsAuth}) => {
                 <Navbar setIsAuth={setIsAuth}/>
                 <div className="widgets">
                     <WidgetInfo type="students"/>
-                    <WidgetInfo type="courses"/>
+                    <WidgetInfo type="groups"/>
                 </div>
             </div>
         </div>

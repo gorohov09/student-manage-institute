@@ -1,21 +1,35 @@
 .navbar {
     height: 77px;
+    border-bottom: 0.5px solid rgb(231, 228, 228);
     display: flex;
     align-items: center;
     font-size: 14px;
-    color: #ffffff;
-    background:linear-gradient( var(--primary-color), var(--secondary--color));
+    color: #555;
 
     .wrapper {
         width: 100%;
-        padding: 0 20px;
+        padding: 20px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        .logo{
-            color: #ffffff;
-            font-size: 30px;
+
+        .search {
+            display: flex;
+            align-items: center;
+            border: 0.5px solid lightgray;
+            padding: 3px;
+
+            input {
+                border: none;
+                outline: none;
+                background-color: transparent;
+
+                &::placeholder {
+                    font-size: 12px;
+                }
+            }
         }
+
         .items {
             display: flex;
             align-items: center;
