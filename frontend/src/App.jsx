@@ -3,6 +3,7 @@ import AuthForm from "./components/authForm/AuthForm";
 import { Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import useToken from "./hooks/useToken";
+import GroupsPage from "./pages/groups/GroupsPage";
 
 function App() {
 	const { token, setToken } = useToken();
@@ -22,6 +23,7 @@ function App() {
 		<Routes>
 			<Route path="/" element={<HomePage setIsAuth={setIsAuth}/>} />
 			<Route path="/login" element={<AuthForm setToken={setToken} setIsAuth={setIsAuth}/>}/>
+			<Route path="/groups" element={<GroupsPage setIsAuth={setIsAuth}/>}/>
 		</Routes>
     </div>
   );

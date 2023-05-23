@@ -16,11 +16,11 @@ const Sidebar = () => {
                     <p className="title">ОСНОВНАЯ ИНФОМРАЦИЯ</p>
                     <li>
                         <AccountCircleIcon className='icon' />
-                        <span>Студенты</span>
+                        <Link to="/students"><span>Студенты</span></Link>
                     </li>
                     <li>
                         <MenuBookIcon className='icon' />
-                        <Link to="/courses"><span>Группы</span></Link>
+                        <Link to="/groups"><span>Группы</span></Link>
                     </li>
                 </ul>
             </div>
