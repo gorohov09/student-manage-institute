@@ -18,7 +18,7 @@ const GroupsPage = ({setIsAuth}) => {
                     <div className="operation">
                         <Stack direction="row" spacing={2}>
                             <Button>
-                                <Link to="/addGroup"><span className="addGroup">Добавить группу</span></Link>
+                                <Link to="/addGroup"><span className="addGroupLink">Добавить группу</span></Link>
                             </Button>
 
                             <Button color="secondary">
