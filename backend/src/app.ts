@@ -5,8 +5,10 @@ import { TYPES } from './types';
 import { IExceptionFilter } from './errors/exception.filter.interface';
 import { ILogger } from './logger/logger.interface';
 import { json } from 'body-parser';
-import { UserController } from './users/controller/users.controller';
 import 'reflect-metadata';
+import { IConfigService } from './config/config.service.interface';
+import { IUserController } from './users/controller/users.controller.interface';
+import { UserController } from './users/controller/users.controller';
 
 @injectable()
 export class App {
@@ -18,6 +20,7 @@ export class App {
 		@inject(TYPES.ILogger) private logger: ILogger,
 		@inject(TYPES.UserController) private userController: UserController,
 		@inject(TYPES.ExceptionFilter) private exceptionFilter: IExceptionFilter,
+		@inject(TYPES.ConfigService) private configService: IConfigService,
 	) {
 		this.app = express();
 		this.port = 8000;

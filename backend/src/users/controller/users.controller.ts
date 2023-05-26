@@ -10,6 +10,7 @@ import { TYPES } from '../../types';
 import { ILogger } from '../../logger/logger.interface';
 import { IUserService } from '../service/users.service.interface';
 import 'reflect-metadata';
+import { ValidateMiddleware } from '../../common/validate.middleware';
 
 @injectable()
 export class UserController extends BaseController implements IUserController {
@@ -29,6 +30,7 @@ export class UserController extends BaseController implements IUserController {
 				path: '/register',
 				func: this.register,
 				method: 'post',
+				middlewares: [new ValidateMiddleware(UserRegisterDto)],
 			},
 		];
 
