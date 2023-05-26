@@ -1,14 +1,14 @@
-import { Request, Response, NextFunction } from "express";
-import { BaseController } from "../../common/base.controller";
-import { IControllerRoute } from "../../common/route.interface";
-import { HTTPError } from "../../errors/http-error.class";
-import { IUserController } from "./users.controller.interface";
-import { UserLoginDto } from "../dto/user-login.dto";
-import { UserRegisterDto } from "../dto/user-register.dto";
-import { inject, injectable } from "inversify";
-import { TYPES } from "../../types";
-import { ILogger } from "../../logger/logger.interface";
-import { IUserService } from "../service/users.service.interface";
+import { Request, Response, NextFunction } from 'express';
+import { BaseController } from '../../common/base.controller';
+import { IControllerRoute } from '../../common/route.interface';
+import { HTTPError } from '../../errors/http-error.class';
+import { IUserController } from './users.controller.interface';
+import { UserLoginDto } from '../dto/user-login.dto';
+import { UserRegisterDto } from '../dto/user-register.dto';
+import { inject, injectable } from 'inversify';
+import { TYPES } from '../../types';
+import { ILogger } from '../../logger/logger.interface';
+import { IUserService } from '../service/users.service.interface';
 import 'reflect-metadata';
 
 @injectable()
@@ -46,11 +46,10 @@ export class UserController extends BaseController implements IUserController {
 		res: Response,
 		next: NextFunction,
 	): Promise<void> {
-
 		console.log(body);
 		const result = await this.userService.createUser(body);
 		if (!result) {
-			return next(new HTTPError(422, 'Такой пользователь уже существует'));
+			return next(new HTTPError(422, 'Такой пользователь уже сущеуууствует'));
 		}
 
 		this.ok(res, { email: result.email });

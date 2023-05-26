@@ -1,14 +1,14 @@
-import { Container, ContainerModule, interfaces } from "inversify";
-import { App } from "./app";
-import { ExceptionFilter } from "./errors/exception.filter";
-import { LoggerService } from "./logger/logger.service";
-import { UserController } from "./users/controller/users.controller";
-import { TYPES } from "./types";
-import { ILogger } from "./logger/logger.interface";
-import { IExceptionFilter } from "./errors/exception.filter.interface";
-import { IUserController } from "./users/controller/users.controller.interface";
-import { IUserService } from "./users/service/users.service.interface";
-import { UserService } from "./users/service/users.service";
+import { Container, ContainerModule, interfaces } from 'inversify';
+import { App } from './app';
+import { ExceptionFilter } from './errors/exception.filter';
+import { LoggerService } from './logger/logger.service';
+import { UserController } from './users/controller/users.controller';
+import { TYPES } from './types';
+import { ILogger } from './logger/logger.interface';
+import { IExceptionFilter } from './errors/exception.filter.interface';
+import { IUserController } from './users/controller/users.controller.interface';
+import { IUserService } from './users/service/users.service.interface';
+import { UserService } from './users/service/users.service';
 import 'reflect-metadata';
 
 export interface IBootstrapReturn {
