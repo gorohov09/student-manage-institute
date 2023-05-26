@@ -6,22 +6,37 @@ import { UserLoginDto } from '../dto/user-login.dto';
 import 'reflect-metadata';
 import { TYPES } from '../../types';
 import { IConfigService } from '../../config/config.service.interface';
+import { IUserRepository } from '../repository/user.repository.interface';
+import { compare } from 'bcryptjs';
 
 @injectable()
 export class UserService implements IUserService {
-	constructor(@inject(TYPES.ConfigService) private configService: IConfigService) {}
+	constructor(
+		@inject(TYPES.ConfigService) private configService: IConfigService,
+		@inject(TYPES.UserRepository) private userRepository: IUserRepository,
+	) {}
 
 	async createUser({ name, email, password }: UserRegisterDto): Promise<User | null> {
 		const newUser = new User(email, name);
 		await newUser.setPassword(password, this.configService.get<number>('SALT'));
-		console.log(newUser);
-		//проверка что он есть?
-		//если есть - возвращаем null
-		//если нет - создаем
-		return null;
+		const result = await this.userRepository.create(newUser);
+		if (result) {
+			return newUser;
+		} else {
+			return null;
+		}
 	}
 
-	async validateUser({ email, password }: UserLoginDto): Promise<boolean> {
-		return true;
+	async loginUser({ email, password }: UserLoginDto): Promise<boolean> {
+		const user = await this.userRepository.getByEmail(email);
+
+		if (user) {
+			const res = await compare(password, user.password);
+			if (res) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 }

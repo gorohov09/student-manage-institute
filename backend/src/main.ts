@@ -12,6 +12,8 @@ import { UserService } from './users/service/users.service';
 import 'reflect-metadata';
 import { IConfigService } from './config/config.service.interface';
 import { ConfigService } from './config/config.service';
+import { IUserRepository } from './users/repository/user.repository.interface';
+import { UserRepository } from './users/repository/user.repository';
 
 export interface IBootstrapReturn {
 	appContainer: Container;
@@ -23,6 +25,7 @@ export const appBindings = new ContainerModule((bind: interfaces.Bind) => {
 	bind<IExceptionFilter>(TYPES.ExceptionFilter).to(ExceptionFilter);
 	bind<IUserController>(TYPES.UserController).to(UserController);
 	bind<IUserService>(TYPES.UserService).to(UserService);
+	bind<IUserRepository>(TYPES.UserRepository).to(UserRepository);
 	bind<IConfigService>(TYPES.ConfigService).to(ConfigService).inSingletonScope();
 	bind<App>(TYPES.Application).to(App);
 });

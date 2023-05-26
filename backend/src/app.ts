@@ -9,12 +9,14 @@ import 'reflect-metadata';
 import { IConfigService } from './config/config.service.interface';
 import { IUserController } from './users/controller/users.controller.interface';
 import { UserController } from './users/controller/users.controller';
+import * as mongoose from 'mongoose';
 
 @injectable()
 export class App {
 	app: Express;
 	server: Server;
 	port: number;
+	urlDatabase: string;
 
 	constructor(
 		@inject(TYPES.ILogger) private logger: ILogger,
@@ -24,6 +26,7 @@ export class App {
 	) {
 		this.app = express();
 		this.port = 8000;
+		this.urlDatabase = 'mongodb://127.0.0.1:27017/instituteDb';
 	}
 
 	useMiddleware(): void {
@@ -38,7 +41,12 @@ export class App {
 		this.app.use(this.exceptionFilter.catch.bind(this.exceptionFilter));
 	}
 
+	async connectDatabase(): Promise<void> {
+		await mongoose.connect(this.urlDatabase);
+	}
+
 	public async init(): Promise<void> {
+		await this.connectDatabase().catch((err) => this.logger.error(err));
 		this.useMiddleware();
 		this.useRoutes();
 		this.useExceptionFilters();

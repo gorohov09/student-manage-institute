@@ -38,9 +38,13 @@ export class UserController extends BaseController implements IUserController {
 		this.userService = userService;
 	}
 
-	login({ body }: Request<{}, {}, UserLoginDto>, res: Response, next: NextFunction): void {
-		//const newUser = new User(body.email, body.)
-		this.ok(res, 'login');
+	async login(
+		{ body }: Request<{}, {}, UserLoginDto>,
+		res: Response,
+		next: NextFunction,
+	): Promise<void> {
+		const result = await this.userService.loginUser(body);
+		this.ok(res, { result: result });
 	}
 
 	async register(
@@ -48,7 +52,6 @@ export class UserController extends BaseController implements IUserController {
 		res: Response,
 		next: NextFunction,
 	): Promise<void> {
-		console.log(body);
 		const result = await this.userService.createUser(body);
 		if (!result) {
 			return next(new HTTPError(422, 'Такой пользователь уже сущеуууствует'));
