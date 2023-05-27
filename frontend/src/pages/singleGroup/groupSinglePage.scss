@@ -1,0 +1,31 @@
+.groupSingleBlock {
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    .operationInGroup {
+        margin-bottom: 20px;
+        button {
+            color: rgb(126, 0, 189);
+            font-size: 18px;
+        }
+
+        a {
+            text-decoration: none;
+            color: rgb(126, 0, 189);
+            font-size: 18px;
+        }
+    }
+
+    .groupInformText {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 30px;
+
+        h2 {
+            color: rgb(114, 38, 161);
+            font-size: 35px;
+        }
+    }
+}

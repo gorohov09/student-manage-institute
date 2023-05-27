@@ -2,14 +2,13 @@ import Button from '@mui/material/Button';
 
 import {useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
-import useCourseService from '../../services/CourseService.jsx';
 import { ThemeProvider  } from '@mui/material/styles';
 import theme from '../muiTheme.jsx';
-
 import './loginForm.scss'
+import useInstituteService from '../../services/InstituteService.jsx';
 
 const LoginForm = ({setToken, setIsAuth}) => {
-    const {loginUser, error, clearError} = useCourseService();
+    const {loginUser, error, clearError} = useInstituteService();
     const navigate = useNavigate();
 
     const [email, setEmail] = useState();

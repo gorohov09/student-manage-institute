@@ -11,6 +11,7 @@ import { IUserController } from './users/controller/users.controller.interface';
 import { UserController } from './users/controller/users.controller';
 import * as mongoose from 'mongoose';
 import { GroupController } from './groups/controller/group.controller';
+import cors from 'cors';
 
 @injectable()
 export class App {
@@ -50,6 +51,7 @@ export class App {
 
 	public async init(): Promise<void> {
 		await this.connectDatabase().catch((err) => this.logger.error(err));
+		this.app.use(cors());
 		this.useMiddleware();
 		this.useRoutes();
 		this.useExceptionFilters();

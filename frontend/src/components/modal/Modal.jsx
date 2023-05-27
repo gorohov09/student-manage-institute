@@ -3,6 +3,7 @@ import {useEffect} from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import { Button } from '@mui/material';
 
 const style = {
     position: 'absolute',
@@ -20,7 +21,7 @@ const style = {
 };
 
 
-const BasicModal = ({isOpen, header, text}) => {
+const BasicModal = ({isOpen, header, text, handler}) => {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -45,6 +46,7 @@ const BasicModal = ({isOpen, header, text}) => {
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
               {text}
             </Typography>
+            <Button onClick={() => handler()}>Да</Button>
           </Box>
         </Modal>
       </div>

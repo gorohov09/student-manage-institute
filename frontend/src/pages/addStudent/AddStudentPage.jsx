@@ -7,31 +7,39 @@ import {Spinner} from "react-bootstrap";
 import { ThemeProvider  } from '@mui/material/styles';
 import theme from '../../components/muiTheme.jsx';
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 
-import './addGroupPage.scss';
+import './addStudentPage.scss';
 import useInstituteService from "../../services/InstituteService";
 
-const AddGroupPage = ({setIsAuth}) => {
+const AddStudentPage = ({setIsAuth}) => {
+
+    const {groupId} = useParams()
 
     const [loading, setLoading] = useState(false);
-    const [number, setNumber] = useState();
-    const [specialization, setSpecialization] = useState();
+    const [lastName, setLastName] = useState();
+    const [firstName, setFirstName] = useState();
+    const [patronymic, setPatronymic] = useState();
+    const [birthday, setBirthday] = useState();
+
     const navigate = useNavigate();
 
-    const {createGroup} = useInstituteService();
+    const {createStudent} = useInstituteService();
 
     const onHandleSubmit = async(e) => {
         e.preventDefault();
 
-        if (number == null || number === '' || specialization == null || specialization === ''){
+        if (lastName == null || lastName === '' || firstName == null || firstName === ''){
             return;
         }
 
-        const data = await createGroup({
-			number: number,
-		  	specialization: specialization
+        const data = await createStudent({
+			lastName: lastName,
+		  	firstName: firstName,
+            patronymic: patronymic,
+            birthday: birthday,
+            groupId: groupId
 		});
 
         console.log(data);
@@ -40,7 +48,7 @@ const AddGroupPage = ({setIsAuth}) => {
 			e.target.reset(); 
 		}
 		else{
-			navigate("/groups")
+			navigate(`/groupSingle/${groupId}`)
 		}
     }
 
@@ -50,22 +58,34 @@ const AddGroupPage = ({setIsAuth}) => {
             <Sidebar />
             <div className="homeContainer">
                 <Navbar setIsAuth={setIsAuth}/>
-                <div className="addGroup">
+                <div className="addStudent">
                         {
                             !loading ?
-                            <div className="addGroup__form">
-                                <h2>Добавление группы</h2>
+                            <div className="addStudent__form">
+                                <h2>Добавление студента в группу</h2>
                                 <form onSubmit={onHandleSubmit} className="course__form"> 
                                     <div className="course_name input">
                                         <label>
-                                            <p>Номер группы</p>
-                                            <input type="text" onChange={e => setNumber(e.target.value)}/>
+                                            <p>Фамилия</p>
+                                            <input type="text" onChange={e => setLastName(e.target.value)}/>
                                         </label>
                                     </div>
                                     <div className="course_desc input">
                                         <label>
-                                            <p>Специальность</p>
-                                            <input type="text" onChange={e => setSpecialization(e.target.value)}/>
+                                            <p>Имя</p>
+                                            <input type="text" onChange={e => setFirstName(e.target.value)}/>
+                                        </label>
+                                    </div>
+                                    <div className="course_desc input">
+                                        <label>
+                                            <p>Отчество</p>
+                                            <input type="text" onChange={e => setPatronymic(e.target.value)}/>
+                                        </label>
+                                    </div>
+                                    <div className="course_desc input">
+                                        <label>
+                                            <p>Дата рождения</p>
+                                            <input type="text" onChange={e => setBirthday(e.target.value)}/>
                                         </label>
                                     </div>
                                     <div className="button input">
@@ -87,4 +107,4 @@ const AddGroupPage = ({setIsAuth}) => {
     )
 }
 
-export default AddGroupPage;
+export default AddStudentPage;

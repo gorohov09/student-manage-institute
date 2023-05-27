@@ -5,6 +5,8 @@ import { useState } from "react";
 import useToken from "./hooks/useToken";
 import GroupsPage from "./pages/groups/GroupsPage";
 import AddGroupPage from "./pages/addGroup/AddGroupPage";
+import GroupSinglePage from "./pages/singleGroup/GroupSinglePage";
+import AddStudentPage from "./pages/addStudent/AddStudentPage";
 
 function App() {
 	const { token, setToken } = useToken();
@@ -26,6 +28,8 @@ function App() {
 			<Route path="/login" element={<AuthForm setToken={setToken} setIsAuth={setIsAuth}/>}/>
 			<Route path="/groups" element={<GroupsPage setIsAuth={setIsAuth}/>}/>
 			<Route path="/addGroup" element={<AddGroupPage setIsAuth={setIsAuth}/>}/>
+			<Route path="/groupSingle/:groupId" element={<GroupSinglePage setIsAuth={setIsAuth}/>}/>
+			<Route path="/addStudent/:groupId" element={<AddStudentPage setIsAuth={setIsAuth}/>}/>
 		</Routes>
     </div>
   );

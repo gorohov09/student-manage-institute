@@ -1,4 +1,3 @@
-import { Types } from 'mongoose';
 import { Group } from '../group.entity';
 import { Student } from '../student.entity';
 import { IGroupRepository } from './group.repository.interface';
@@ -7,6 +6,21 @@ import { injectable } from 'inversify';
 
 @injectable()
 export class GroupRepository implements IGroupRepository {
+	async deleteStudentByGroup(idGroup: string, idStudent: string): Promise<boolean> {
+		const res = await StudentModel.findOneAndDelete({ _id: idStudent });
+
+		const groupModel = (await GroupModel.findById(idGroup)) as any;
+
+		const index = groupModel?.students?.indexOf(res?._id, 0);
+		if (index > -1) {
+			groupModel?.students.splice(index, 1);
+		}
+
+		await groupModel?.save();
+
+		return true;
+	}
+
 	async getGroupById(idGroup: string): Promise<Group> {
 		const groupModel = await GroupModel.findById(idGroup);
 

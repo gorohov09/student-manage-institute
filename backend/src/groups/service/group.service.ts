@@ -11,6 +11,11 @@ import { IGroupRepository } from '../repository/group.repository.interface';
 export class GroupService implements IGroupService {
 	constructor(@inject(TYPES.GroupRepository) private groupRepository: IGroupRepository) {}
 
+	async deleteStudentsByGroup(idGroup: string, idStudent: string): Promise<boolean> {
+		const result = await this.groupRepository.deleteStudentByGroup(idGroup, idStudent);
+		return result;
+	}
+
 	async getStudentsByGroup(idGroup: string): Promise<Group> {
 		const students = await this.groupRepository.getStudentsByGroup(idGroup);
 		const group = await this.groupRepository.getGroupById(idGroup);

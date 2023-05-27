@@ -10,6 +10,7 @@ import { IGroupService } from '../service/group.service.interface';
 import { GroupCreateDto } from '../dto/group-create-dto';
 import { StudentCreateDto } from '../dto/student-create-dto';
 import { GroupDto } from '../dto/group-dto';
+import { StudentDeleteDto } from '../dto/student-delete-dto';
 
 @injectable()
 export class GroupController extends BaseController implements IGroupController {
@@ -40,9 +41,25 @@ export class GroupController extends BaseController implements IGroupController 
 				func: this.getStudentsByGroup,
 				method: 'get',
 			},
+			{
+				path: '/deleteStudent',
+				func: this.deleteStudentByGroup,
+				method: 'post',
+			},
 		];
 		this.groupService = groupService;
 		this.bindRoutes(routes);
+	}
+
+	async deleteStudentByGroup(
+		{ body }: Request<{}, {}, StudentDeleteDto>,
+		res: Response,
+		next: NextFunction,
+	): Promise<void> {
+		const result = await this.groupService.deleteStudentsByGroup(body.groupId, body.studentId);
+		this.ok(res, {
+			result: result,
+		});
 	}
 
 	async getStudentsByGroup(req: Request, res: Response, next: NextFunction): Promise<void> {

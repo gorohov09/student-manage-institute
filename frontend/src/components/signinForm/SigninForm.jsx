@@ -1,7 +1,6 @@
 import Button from '@mui/material/Button';
 
 import * as React from 'react';
-import useCourseService from '../../services/CourseService';
 
 import {useState, useEffect} from "react";
 
@@ -11,14 +10,15 @@ import { ThemeProvider  } from '@mui/material/styles';
 import theme from '../muiTheme.jsx';
 
 import BasicModal from '../modal/Modal';
+import useInstituteService from '../../services/InstituteService';
 
 const SigninForm = ({setToken}) => {
-    const {registerUser, error, clearError} = useCourseService();
+    const {registerUser, error, clearError} = useInstituteService();
 
     const [firstName, setFirstName] = useState();
     const [lastName, setLastName] = useState();
     const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
+    const [password, setPassword] = useState(); 
     const [itsOk, setItsOk] = useState(false);
     const [isRequest, setIsRequest] = useState(false);
 

@@ -9,11 +9,11 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {Link} from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import useCourseService from '../../services/CourseService';
-import {Spinner} from 'react-bootstrap';
+import { Spinner } from 'react-bootstrap';
 
 
 import './groupList.scss';
+import useInstituteService from '../../services/InstituteService';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -42,35 +42,16 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export default function GroupList({isSortedByDate}) {
 
-	//const [data, setData] = useState(null);
+	const [data, setData] = useState(null);
   	const [loading, setLoading] = useState(true);
 
-  	// const {getTeacherCourses} = useCourseService();
+  	const {getAllGroups} = useInstituteService();
 
-	// useEffect(() => {
-	// 	getTeacherCourses()
-	// 			.then(data => setData(data))
-	// 			.then(setLoading(false));
-	// }, []);
-
-    const data = {
-        groups: [
-            {
-                id: 123,
-                number: '4311',
-                specialization: 'Программная инженерия',
-                countStudents: 11,
-                creation: '12-12-2020'
-            },
-            {
-                id: 120,
-                number: '4310',
-                specialization: 'Программная инженерия',
-                countStudents: 3,
-                creation: '15-12-2020'
-            }
-        ]
-    }
+	useEffect(() => {
+		getAllGroups()
+				.then(data => setData(data))
+				.then(setLoading(false));
+	}, []);
 
     console.log(data);
 
@@ -78,12 +59,12 @@ export default function GroupList({isSortedByDate}) {
 		return data.groups.map((group) => (
 			<StyledTableRow key={group.id}>
 				<StyledTableCell component="th" scope="row">
-					<Link className='link'>{group.id}</Link>
+					<Link className='link' to={`/groupSingle/${group.id}`}>{group.id}</Link>
 				</StyledTableCell>
 				<StyledTableCell align="right">{group.number}</StyledTableCell>
 				<StyledTableCell align="right">{group.specialization}</StyledTableCell>
 				<StyledTableCell align="right">{group.countStudents}</StyledTableCell>
-				<StyledTableCell align="right">{group.creation}</StyledTableCell>
+				<StyledTableCell align="right">{group.creation.split('T')[0]}</StyledTableCell>
 			</StyledTableRow>
 		))
 	};
@@ -97,7 +78,7 @@ export default function GroupList({isSortedByDate}) {
 
   	return (
 		<div className='group_list__container'>
-		{loading ?
+		{!loading ?
 		<>
 			<TableContainer component={Paper}>
       			<Table sx={{ minWidth: 700 }} aria-label="customized table">

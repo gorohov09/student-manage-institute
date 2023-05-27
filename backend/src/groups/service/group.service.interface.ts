@@ -8,4 +8,5 @@ export interface IGroupService {
 	createStudent: (dto: StudentCreateDto) => Promise<Student | null>;
 	getAllGroup: () => Promise<Group[] | null>;
 	getStudentsByGroup: (idGroup: string) => Promise<Group>;
+	deleteStudentsByGroup: (idGroup: string, idStudent: string) => Promise<boolean>;
 }

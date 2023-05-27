@@ -8,4 +8,5 @@ export interface IGroupRepository {
 	getAllGroup: () => Promise<Group[]>;
 	getStudentsByGroup: (idGroup: string) => Promise<Student[]>;
 	getGroupById: (idGroup: string) => Promise<Group>;
+	deleteStudentByGroup: (idGroup: string, idStudent: string) => Promise<boolean>;
 }
