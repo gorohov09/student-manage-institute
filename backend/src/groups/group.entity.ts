@@ -4,6 +4,7 @@ export class Group {
 	private _id: string;
 	private readonly _creation: Date;
 	private _students: Student[];
+	private _countStudents: number;
 
 	constructor(
 		private readonly _number: number,
@@ -28,6 +29,14 @@ export class Group {
 
 	get id(): string {
 		return this._id;
+	}
+
+	get countStudents(): number {
+		return this._countStudents;
+	}
+
+	set countStudents(count: number) {
+		this._countStudents = count;
 	}
 
 	get students(): Student[] {

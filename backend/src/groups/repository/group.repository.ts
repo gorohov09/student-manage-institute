@@ -44,6 +44,7 @@ export class GroupRepository implements IGroupRepository {
 		const groups = groupsModel.map((model) => {
 			const group = new Group(model.number, model.specialization, model.creation);
 			group.id = model.id;
+			group.countStudents = model.students?.length as number;
 			return group;
 		});
 

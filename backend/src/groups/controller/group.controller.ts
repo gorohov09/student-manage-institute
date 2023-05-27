@@ -9,8 +9,7 @@ import { IGroupController } from './group.controller.interface';
 import { IGroupService } from '../service/group.service.interface';
 import { GroupCreateDto } from '../dto/group-create-dto';
 import { StudentCreateDto } from '../dto/student-create-dto';
-import { ParamsDictionary } from 'express-serve-static-core';
-import { ParsedQs } from 'qs';
+import { GroupDto } from '../dto/group-dto';
 
 @injectable()
 export class GroupController extends BaseController implements IGroupController {
@@ -60,7 +59,18 @@ export class GroupController extends BaseController implements IGroupController 
 
 	async getAllGroups(req: Request, res: Response, next: NextFunction): Promise<void> {
 		const result = await this.groupService.getAllGroup();
-		this.ok(res, { groups: result });
+		this.ok(res, {
+			groups: result?.map(
+				(group) =>
+					new GroupDto(
+						group.id,
+						group.number,
+						group.specialization,
+						group.Creation,
+						group.countStudents,
+					),
+			),
+		});
 	}
 
 	async createGroup(
