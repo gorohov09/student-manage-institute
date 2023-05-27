@@ -9,6 +9,8 @@ import { IGroupController } from './group.controller.interface';
 import { IGroupService } from '../service/group.service.interface';
 import { GroupCreateDto } from '../dto/group-create-dto';
 import { StudentCreateDto } from '../dto/student-create-dto';
+import { ParamsDictionary } from 'express-serve-static-core';
+import { ParsedQs } from 'qs';
 
 @injectable()
 export class GroupController extends BaseController implements IGroupController {
@@ -29,9 +31,36 @@ export class GroupController extends BaseController implements IGroupController 
 				func: this.createStudent,
 				method: 'post',
 			},
+			{
+				path: '/getAllGroups',
+				func: this.getAllGroups,
+				method: 'get',
+			},
+			{
+				path: '/getStudentsByGroup',
+				func: this.getStudentsByGroup,
+				method: 'get',
+			},
 		];
 		this.groupService = groupService;
 		this.bindRoutes(routes);
+	}
+
+	async getStudentsByGroup(req: Request, res: Response, next: NextFunction): Promise<void> {
+		const idGroup = req.query.idGroup as string;
+		const result = await this.groupService.getStudentsByGroup(idGroup);
+		this.ok(res, {
+			group: {
+				number: result.number,
+				specialization: result.specialization,
+				students: result.students,
+			},
+		});
+	}
+
+	async getAllGroups(req: Request, res: Response, next: NextFunction): Promise<void> {
+		const result = await this.groupService.getAllGroup();
+		this.ok(res, { groups: result });
 	}
 
 	async createGroup(

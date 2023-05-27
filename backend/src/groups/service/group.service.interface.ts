@@ -6,4 +6,6 @@ import { Student } from '../student.entity';
 export interface IGroupService {
 	createGroup: (dto: GroupCreateDto) => Promise<Group | null>;
 	createStudent: (dto: StudentCreateDto) => Promise<Student | null>;
+	getAllGroup: () => Promise<Group[] | null>;
+	getStudentsByGroup: (idGroup: string) => Promise<Group>;
 }

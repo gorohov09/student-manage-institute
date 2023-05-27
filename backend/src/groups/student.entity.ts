@@ -1,6 +1,5 @@
 export class Student {
-	private readonly _creation: Date;
-	private readonly students: Student[];
+	private _id: string;
 
 	constructor(
 		private readonly _lastName: string,
@@ -23,5 +22,13 @@ export class Student {
 
 	get birthday(): Date {
 		return this._birthday;
+	}
+
+	get id(): string {
+		return this._id;
+	}
+
+	set id(id: string) {
+		this._id = id;
 	}
 }

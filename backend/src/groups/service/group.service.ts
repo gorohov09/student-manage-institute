@@ -11,6 +11,18 @@ import { IGroupRepository } from '../repository/group.repository.interface';
 export class GroupService implements IGroupService {
 	constructor(@inject(TYPES.GroupRepository) private groupRepository: IGroupRepository) {}
 
+	async getStudentsByGroup(idGroup: string): Promise<Group> {
+		const students = await this.groupRepository.getStudentsByGroup(idGroup);
+		const group = await this.groupRepository.getGroupById(idGroup);
+		group.students = students;
+		return group;
+	}
+
+	async getAllGroup(): Promise<Group[] | null> {
+		const groops = await this.groupRepository.getAllGroup();
+		return groops;
+	}
+
 	async createGroup(dto: GroupCreateDto): Promise<Group | null> {
 		const group = new Group(dto.number, dto.specialization);
 		const result = await this.groupRepository.createGroup(group);
