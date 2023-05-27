@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  frontend:
+    build: ./frontend
+    restart: always
+    ports:
+      - '3000:3000'
+
+  api:
+    build: ./backend
+    restart: always
+    ports:
+      - '5555:8000'
+    depends_on:
+      - moongodb
+
+  moongodb:
+    image: mongo
+    ports:
+      - '27017:27017'
