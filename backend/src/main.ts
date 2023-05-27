@@ -14,6 +14,12 @@ import { IConfigService } from './config/config.service.interface';
 import { ConfigService } from './config/config.service';
 import { IUserRepository } from './users/repository/user.repository.interface';
 import { UserRepository } from './users/repository/user.repository';
+import { IGroupRepository } from './groups/repository/group.repository.interface';
+import { GroupRepository } from './groups/repository/group.repository';
+import { IGroupService } from './groups/service/group.service.interface';
+import { GroupService } from './groups/service/group.service';
+import { IGroupController } from './groups/controller/group.controller.interface';
+import { GroupController } from './groups/controller/group.controller';
 
 export interface IBootstrapReturn {
 	appContainer: Container;
@@ -24,8 +30,11 @@ export const appBindings = new ContainerModule((bind: interfaces.Bind) => {
 	bind<ILogger>(TYPES.ILogger).to(LoggerService);
 	bind<IExceptionFilter>(TYPES.ExceptionFilter).to(ExceptionFilter);
 	bind<IUserController>(TYPES.UserController).to(UserController);
+	bind<IGroupController>(TYPES.GroupController).to(GroupController);
 	bind<IUserService>(TYPES.UserService).to(UserService);
 	bind<IUserRepository>(TYPES.UserRepository).to(UserRepository);
+	bind<IGroupRepository>(TYPES.GroupRepository).to(GroupRepository);
+	bind<IGroupService>(TYPES.GroupService).to(GroupService);
 	bind<IConfigService>(TYPES.ConfigService).to(ConfigService).inSingletonScope();
 	bind<App>(TYPES.Application).to(App);
 });

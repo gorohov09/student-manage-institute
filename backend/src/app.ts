@@ -10,6 +10,7 @@ import { IConfigService } from './config/config.service.interface';
 import { IUserController } from './users/controller/users.controller.interface';
 import { UserController } from './users/controller/users.controller';
 import * as mongoose from 'mongoose';
+import { GroupController } from './groups/controller/group.controller';
 
 @injectable()
 export class App {
@@ -21,6 +22,7 @@ export class App {
 	constructor(
 		@inject(TYPES.ILogger) private logger: ILogger,
 		@inject(TYPES.UserController) private userController: UserController,
+		@inject(TYPES.GroupController) private groupController: GroupController,
 		@inject(TYPES.ExceptionFilter) private exceptionFilter: IExceptionFilter,
 		@inject(TYPES.ConfigService) private configService: IConfigService,
 	) {
@@ -35,6 +37,7 @@ export class App {
 
 	useRoutes(): void {
 		this.app.use('/users', this.userController.router);
+		this.app.use('/groups', this.groupController.router);
 	}
 
 	useExceptionFilters(): void {
