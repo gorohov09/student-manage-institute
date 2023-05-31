@@ -7,6 +7,8 @@ import GroupsPage from "./pages/groups/GroupsPage";
 import AddGroupPage from "./pages/addGroup/AddGroupPage";
 import GroupSinglePage from "./pages/singleGroup/GroupSinglePage";
 import AddStudentPage from "./pages/addStudent/AddStudentPage";
+import UpdateGroupPage from "./pages/updateGroup/UpdateGroupPage";
+import UpdateStudentPage from "./pages/updateStudent/UpdateStudent";
 
 function App() {
 	const { token, setToken } = useToken();
@@ -30,6 +32,8 @@ function App() {
 			<Route path="/addGroup" element={<AddGroupPage setIsAuth={setIsAuth}/>}/>
 			<Route path="/groupSingle/:groupId" element={<GroupSinglePage setIsAuth={setIsAuth}/>}/>
 			<Route path="/addStudent/:groupId" element={<AddStudentPage setIsAuth={setIsAuth}/>}/>
+			<Route path="/groupUpdate/:groupId" element={<UpdateGroupPage setIsAuth={setIsAuth}/>}/>
+			<Route path="/studentUpdate/:studentId/:groupId" element={<UpdateStudentPage setIsAuth={setIsAuth}/>}/>
 		</Routes>
     </div>
   );

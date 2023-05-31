@@ -14,6 +14,7 @@ import { Spinner } from 'react-bootstrap';
 
 import './groupList.scss';
 import useInstituteService from '../../services/InstituteService';
+import BasicModal from '../modal/Modal';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -44,14 +45,30 @@ export default function GroupList({isSortedByDate}) {
 
 	const [data, setData] = useState(null);
   	const [loading, setLoading] = useState(true);
+	const [itsOk, setItsOk] = useState(false);
+	const [deleteGroupId, setDeleteGroupId] = useState(null);
 
-  	const {getAllGroups} = useInstituteService();
+  	const {getAllGroups, deleteGroup} = useInstituteService();
 
 	useEffect(() => {
 		getAllGroups()
 				.then(data => setData(data))
 				.then(setLoading(false));
-	}, []);
+	}, [itsOk]);
+
+	const onDeleteGroup = (groupId) => {
+        setItsOk(true);
+        setDeleteGroupId(groupId);
+    }
+
+    const handlerDelete = () => {
+        const data = {
+            groupId: deleteGroupId,
+        }
+
+        deleteGroup(data)
+            .then(setItsOk(false))
+    }
 
     console.log(data);
 
@@ -65,6 +82,9 @@ export default function GroupList({isSortedByDate}) {
 				<StyledTableCell align="right">{group.specialization}</StyledTableCell>
 				<StyledTableCell align="right">{group.countStudents}</StyledTableCell>
 				<StyledTableCell align="right">{group.creation.split('T')[0]}</StyledTableCell>
+				<StyledTableCell align="right">{<Link onClick={() => onDeleteGroup(group.id)}>Удалить</Link>}</StyledTableCell>
+				<StyledTableCell align="right">{<Link to={`/groupUpdate/${group.id}`}>Изменить</Link>}</StyledTableCell>
+
 			</StyledTableRow>
 		))
 	};
@@ -80,6 +100,10 @@ export default function GroupList({isSortedByDate}) {
 		<div className='group_list__container'>
 		{!loading ?
 		<>
+			<BasicModal isOpen={itsOk} 
+                        header={'Удаление группы'} 
+                        text={'Вы точно хотите удалить группу?'} 
+                        handler={handlerDelete}/>
 			<TableContainer component={Paper}>
       			<Table sx={{ minWidth: 700 }} aria-label="customized table">
         		<TableHead>
@@ -89,6 +113,8 @@ export default function GroupList({isSortedByDate}) {
             		<StyledTableCell>Специальность</StyledTableCell>
             		<StyledTableCell>Кол-во студентов</StyledTableCell>
             		<StyledTableCell align="right">Дата создания</StyledTableCell>
+					<StyledTableCell align="right"></StyledTableCell>
+					<StyledTableCell align="right"></StyledTableCell>
           		</TableRow>
         		</TableHead>
         		<TableBody>

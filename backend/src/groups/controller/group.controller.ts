@@ -11,6 +11,7 @@ import { GroupCreateDto } from '../dto/group-create-dto';
 import { StudentCreateDto } from '../dto/student-create-dto';
 import { GroupDto } from '../dto/group-dto';
 import { StudentDeleteDto } from '../dto/student-delete-dto';
+import { GroupDeleteDto } from '../dto/group-delete-dto';
 
 @injectable()
 export class GroupController extends BaseController implements IGroupController {
@@ -46,9 +47,93 @@ export class GroupController extends BaseController implements IGroupController 
 				func: this.deleteStudentByGroup,
 				method: 'post',
 			},
+			{
+				path: '/deleteGroup',
+				func: this.deleteGroup,
+				method: 'post',
+			},
+			{
+				path: '/getStatistic',
+				func: this.getStatistic,
+				method: 'get',
+			},
+			{
+				path: '/getGroupById',
+				func: this.getGroupById,
+				method: 'get',
+			},
+			{
+				path: '/getStudentById',
+				func: this.getStudentById,
+				method: 'get',
+			},
+			{
+				path: '/updateStudent',
+				func: this.updateStudent,
+				method: 'post',
+			},
+			{
+				path: '/updateGroup',
+				func: this.updateGroup,
+				method: 'post',
+			},
 		];
 		this.groupService = groupService;
 		this.bindRoutes(routes);
+	}
+
+	async updateGroup(
+		{ body, query }: Request<{}, {}, GroupCreateDto>,
+		res: Response,
+		next: NextFunction,
+	): Promise<void> {
+		const idGroup = query.idGroup as string;
+		const result = await this.groupService.updateGroup(idGroup, body);
+		this.ok(res, { result: result });
+	}
+
+	async updateStudent(
+		{ body, query }: Request<{}, {}, StudentCreateDto>,
+		res: Response,
+		next: NextFunction,
+	): Promise<void> {
+		const idStudent = query.idStudent as string;
+		const result = await this.groupService.updateStudent(idStudent, body);
+		this.ok(res, { result: result });
+	}
+
+	async getStudentById(req: Request, res: Response, next: NextFunction): Promise<void> {
+		const idStudent = req.query.idStudent as string;
+		const result = await this.groupService.getStudentById(idStudent);
+		this.ok(res, {
+			student: {
+				lastName: result.lastName,
+				firstName: result.firstName,
+				patronymic: result.patronymic,
+				birthday: result.birthday,
+			},
+		});
+	}
+
+	async getGroupById(req: Request, res: Response, next: NextFunction): Promise<void> {
+		const idGroup = req.query.idGroup as string;
+		const result = await this.groupService.getGroupById(idGroup);
+		this.ok(res, {
+			group: {
+				number: result.number,
+				specialization: result.specialization,
+			},
+		});
+	}
+
+	async getStatistic(req: Request, res: Response, next: NextFunction): Promise<void> {
+		const result = await this.groupService.getCountStudentsAndGroups();
+		this.ok(res, {
+			statistic: {
+				count_groups: result[0],
+				count_students: result[1],
+			},
+		});
 	}
 
 	async deleteStudentByGroup(
@@ -57,6 +142,17 @@ export class GroupController extends BaseController implements IGroupController 
 		next: NextFunction,
 	): Promise<void> {
 		const result = await this.groupService.deleteStudentsByGroup(body.groupId, body.studentId);
+		this.ok(res, {
+			result: result,
+		});
+	}
+
+	async deleteGroup(
+		{ body }: Request<{}, {}, GroupDeleteDto>,
+		res: Response,
+		next: NextFunction,
+	): Promise<void> {
+		const result = await this.groupService.deleteGroup(body.groupId);
 		this.ok(res, {
 			result: result,
 		});

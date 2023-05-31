@@ -3,7 +3,7 @@ import {useHttp} from '../hooks/http.hook';
 const useInstituteService = () => {
 
     const {request, error, clearError} = useHttp();
-    const _apiBase = 'http://localhost:5555/';
+    const _apiBase = 'http://localhost:8000/';
 
     const getToken = () => {
         const tokenString = sessionStorage.getItem('token');
@@ -24,6 +24,11 @@ const useInstituteService = () => {
         return res;
     }
 
+    const getStatistic = async () => {
+        const res = await getResource(_apiBase + `groups/getStatistic`);
+        return res;
+    }
+
     const createGroup = async(groupInform) => {
         const url = `${_apiBase}groups/createGroup`
         return await request(url, 'POST', JSON.stringify(groupInform), {'Content-Type': 'application/json'});
@@ -39,6 +44,32 @@ const useInstituteService = () => {
         return await request(url, 'POST', JSON.stringify(deleteInform), {'Content-Type': 'application/json'});
     }
 
+    const deleteGroup = async(deleteInform) => {
+        const url = `${_apiBase}groups/deleteGroup`
+        return await request(url, 'POST', JSON.stringify(deleteInform), {'Content-Type': 'application/json'});
+    }
+
+    const updateGroup = async(idGroup, updateInform) => {
+        const url = `${_apiBase}groups/updateGroup?idGroup=${idGroup}`
+        console.log(updateInform);
+        return await request(url, 'POST', JSON.stringify(updateInform), {'Content-Type': 'application/json'});
+    }
+
+    const updateStudent = async(idStudent, updateInform) => {
+        const url = `${_apiBase}groups/updateStudent?idStudent=${idStudent}`
+        return await request(url, 'POST', JSON.stringify(updateInform), {'Content-Type': 'application/json'});
+    }
+
+    const getGroupByIdWithoutStudent = async (idGroup) => {
+        const res = await getResource(_apiBase + `groups/getGroupById?idGroup=${idGroup}`);
+        return res;
+    }
+
+    const getStudentById = async (idStudent) => {
+        const res = await getResource(_apiBase + `groups/getStudentById?idStudent=${idStudent}`);
+        return res;
+    }
+
 
     return {error,
         clearError, 
@@ -47,7 +78,13 @@ const useInstituteService = () => {
         getGroupById,
         createGroup,
         createStudent,
-        deleteStudent
+        deleteStudent,
+        deleteGroup,
+        getStatistic,
+        updateGroup,
+        updateStudent,
+        getGroupByIdWithoutStudent,
+        getStudentById
     }
 }
 

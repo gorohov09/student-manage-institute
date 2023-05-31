@@ -11,6 +11,46 @@ import { IGroupRepository } from '../repository/group.repository.interface';
 export class GroupService implements IGroupService {
 	constructor(@inject(TYPES.GroupRepository) private groupRepository: IGroupRepository) {}
 
+	async updateGroup(idGroup: string, group: GroupCreateDto): Promise<boolean> {
+		const res = await this.groupRepository.updateGroup(idGroup, group);
+		return res;
+	}
+
+	async updateStudent(idStudent: string, student: StudentCreateDto): Promise<boolean> {
+		const res = await this.groupRepository.updateStudent(idStudent, student);
+		return res;
+	}
+
+	async getGroupById(idGroup: string): Promise<Group> {
+		const group = await this.groupRepository.getGroupById(idGroup);
+		return group;
+	}
+
+	async getStudentById(idStudent: string): Promise<Student> {
+		const student = await this.groupRepository.getStudentById(idStudent);
+		return student;
+	}
+
+	async getCountStudentsAndGroups(): Promise<number[]> {
+		const students = await this.groupRepository.getAllGroup();
+		const groups = await this.groupRepository.getAllStudents();
+
+		const countStudents = students.length;
+		const countGroups = groups.length;
+
+		const list: number[] = [];
+
+		list.push(countStudents);
+		list.push(countGroups);
+
+		return list;
+	}
+
+	async deleteGroup(idGroup: string): Promise<boolean> {
+		const result = await this.groupRepository.deleteGroup(idGroup);
+		return result;
+	}
+
 	async deleteStudentsByGroup(idGroup: string, idStudent: string): Promise<boolean> {
 		const result = await this.groupRepository.deleteStudentByGroup(idGroup, idStudent);
 		return result;

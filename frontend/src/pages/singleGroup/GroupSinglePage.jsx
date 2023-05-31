@@ -86,7 +86,8 @@ const GroupSinglePage = ({setIsAuth}) => {
 				<StyledTableCell align="right">{student._firstName}</StyledTableCell>
 				<StyledTableCell align="right">{student._patronymic}</StyledTableCell>
 				<StyledTableCell align="right">{student._birthday.split('T')[0]}</StyledTableCell>
-                <StyledTableCell align="right">{<Link onClick={() => onDeleteStudent(student._id)}>Удалить</Link>}</StyledTableCell>
+        		<StyledTableCell align="right">{<Link onClick={() => onDeleteStudent(student._id)}>Удалить</Link>}</StyledTableCell>
+				<StyledTableCell align="right">{<Link to={`/studentUpdate/${student._id}/${groupId}`}>Изменить</Link>}</StyledTableCell>
 			</StyledTableRow>
 		))
 	};
@@ -137,6 +138,7 @@ const GroupSinglePage = ({setIsAuth}) => {
             		                    <StyledTableCell>Отчетсво</StyledTableCell>
             		                    <StyledTableCell align="right">Дата рождения</StyledTableCell>
                                         <StyledTableCell align="right"></StyledTableCell>
+										<StyledTableCell align="right"></StyledTableCell>
           		                    </TableRow>
         		                </TableHead>
         		                <TableBody>
