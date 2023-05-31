@@ -29,7 +29,7 @@ export class App {
 	) {
 		this.app = express();
 		this.port = 8000;
-		this.urlDatabase = 'mongodb://127.0.0.1:27017/instituteDb';
+		this.urlDatabase = 'mongodb://moongodb:27017/instituteDb';
 	}
 
 	useMiddleware(): void {
@@ -37,8 +37,8 @@ export class App {
 	}
 
 	useRoutes(): void {
-		this.app.use('/users', this.userController.router);
-		this.app.use('/groups', this.groupController.router);
+		this.app.use('/api/users', this.userController.router);
+		this.app.use('/api/groups', this.groupController.router);
 	}
 
 	useExceptionFilters(): void {
@@ -56,6 +56,6 @@ export class App {
 		this.useRoutes();
 		this.useExceptionFilters();
 		this.server = this.app.listen(this.port);
-		this.logger.log(`Сервер запущен на http://localhost:${this.port}`);
+		this.logger.log(`Сервер запущен на http://localhost:${this.port}/api`);
 	}
 }

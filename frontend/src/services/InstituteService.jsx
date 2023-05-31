@@ -3,7 +3,7 @@ import {useHttp} from '../hooks/http.hook';
 const useInstituteService = () => {
 
     const {request, error, clearError} = useHttp();
-    const _apiBase = 'http://localhost:8000/';
+    const _apiBase = 'http://localhost:80/api/';
 
     const getToken = () => {
         const tokenString = sessionStorage.getItem('token');
@@ -11,6 +11,7 @@ const useInstituteService = () => {
     }
 
     const getResource = async(url) => {
+        console.log('URL:', url);
         return await request(url, 'GET', null, {'Authorization': 'Bearer ' + getToken()});
     }
 
