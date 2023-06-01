@@ -10,6 +10,7 @@ export class UserRepository implements IUserRepository {
 			name: user.name,
 			email: user.email,
 			password: user.password,
+			isTeacher: user.isTeacher,
 		});
 
 		await userEntity.save();

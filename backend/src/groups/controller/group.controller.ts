@@ -36,6 +36,7 @@ export class GroupController extends BaseController implements IGroupController 
 				path: '/getAllGroups',
 				func: this.getAllGroups,
 				method: 'get',
+				middlewares: [],
 			},
 			{
 				path: '/getStudentsByGroup',
@@ -126,13 +127,14 @@ export class GroupController extends BaseController implements IGroupController 
 		});
 	}
 
-	async getStatistic(req: Request, res: Response, next: NextFunction): Promise<void> {
+	async getStatistic({ user }: Request, res: Response, next: NextFunction): Promise<void> {
 		const result = await this.groupService.getCountStudentsAndGroups();
 		this.ok(res, {
 			statistic: {
 				count_groups: result[0],
 				count_students: result[1],
 			},
+			email: user,
 		});
 	}
 
@@ -170,8 +172,9 @@ export class GroupController extends BaseController implements IGroupController 
 		});
 	}
 
-	async getAllGroups(req: Request, res: Response, next: NextFunction): Promise<void> {
+	async getAllGroups({ user }: Request, res: Response, next: NextFunction): Promise<void> {
 		const result = await this.groupService.getAllGroup();
+		console.log(user);
 		this.ok(res, {
 			groups: result?.map(
 				(group) =>

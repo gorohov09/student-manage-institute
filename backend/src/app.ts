@@ -12,6 +12,7 @@ import { UserController } from './users/controller/users.controller';
 import * as mongoose from 'mongoose';
 import { GroupController } from './groups/controller/group.controller';
 import cors from 'cors';
+import { AuthMiddleware } from './common/auth.middleware';
 
 @injectable()
 export class App {
@@ -29,11 +30,13 @@ export class App {
 	) {
 		this.app = express();
 		this.port = 8000;
-		this.urlDatabase = 'mongodb://moongodb:27017/instituteDb';
+		this.urlDatabase = 'mongodb://127.0.0.1:27017/instituteDb';
 	}
 
 	useMiddleware(): void {
 		this.app.use(json());
+		const authMiddleware = new AuthMiddleware('sdsd');
+		//this.app.use(authMiddleware.execute.bind(authMiddleware));
 	}
 
 	useRoutes(): void {

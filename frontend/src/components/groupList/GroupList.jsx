@@ -41,7 +41,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-export default function GroupList({isSortedByDate}) {
+export default function GroupList({isSortedByDate, isTeacher}) {
 
 	const [data, setData] = useState(null);
   	const [loading, setLoading] = useState(true);
@@ -76,14 +76,18 @@ export default function GroupList({isSortedByDate}) {
 		return data.groups.map((group) => (
 			<StyledTableRow key={group.id}>
 				<StyledTableCell component="th" scope="row">
-					<Link className='link' to={`/groupSingle/${group.id}`}>{group.id}</Link>
+					{
+						isTeacher === true ? <Link className='link' to={`/groupSingle/${group.id}`}>{group.id}</Link>
+						: null
+					}
+					
 				</StyledTableCell>
 				<StyledTableCell align="right">{group.number}</StyledTableCell>
 				<StyledTableCell align="right">{group.specialization}</StyledTableCell>
 				<StyledTableCell align="right">{group.countStudents}</StyledTableCell>
 				<StyledTableCell align="right">{group.creation.split('T')[0]}</StyledTableCell>
-				<StyledTableCell align="right">{<Link onClick={() => onDeleteGroup(group.id)}>Удалить</Link>}</StyledTableCell>
-				<StyledTableCell align="right">{<Link to={`/groupUpdate/${group.id}`}>Изменить</Link>}</StyledTableCell>
+				<StyledTableCell align="right">{isTeacher === true ? <Link onClick={() => onDeleteGroup(group.id)}>Удалить</Link> : null}</StyledTableCell>
+				<StyledTableCell align="right">{isTeacher === true ? <Link to={`/groupUpdate/${group.id}`}>Изменить</Link> : null}</StyledTableCell>
 
 			</StyledTableRow>
 		))

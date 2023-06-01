@@ -17,24 +17,22 @@ const LoginForm = ({setToken, setIsAuth}) => {
     const handleSubmit = async e => {
 		e.preventDefault();
         
-		// const data = await loginUser({
-		// 	email: email,
-		//   	password: password
-		// });
+		const data = await loginUser({
+			email: email,
+		  	password: password
+		});
 
-        const data = {
-            status: 200,
-            token: 'abc',
-        }
-
-		if (data?.status === 500){
+		if (data?.status === 401){
 			console.log('Очистка формы')
 			e.target.reset(); 
 		}
 		else{
-			setToken(data.token);
+			setToken('data.token');
 			setIsAuth(true);
-			navigate("/");
+            if (data.isTeacher)
+			    navigate("/");
+            else
+                navigate("/noTeacher")
 		}
 		
 	}

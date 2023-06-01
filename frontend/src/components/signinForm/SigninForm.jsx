@@ -3,20 +3,29 @@ import Button from '@mui/material/Button';
 import * as React from 'react';
 
 import {useState, useEffect} from "react";
+import { useNavigate } from "react-router-dom";
 
 import './signinForm.scss';
 
 import { ThemeProvider  } from '@mui/material/styles';
 import theme from '../muiTheme.jsx';
 
-import BasicModal from '../modal/Modal';
+import BasicModal, { InformModal } from '../modal/Modal';
 import useInstituteService from '../../services/InstituteService';
+import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material';
+import { CheckBox } from '@mui/icons-material';
 
 const SigninForm = ({setToken}) => {
     const {registerUser, error, clearError} = useInstituteService();
+    const navigate = useNavigate();
+
+    const [value, setValue] = React.useState('female');
+
+    const handleChange = (e) => {
+        setValue(e.target.value);
+    };
 
     const [firstName, setFirstName] = useState();
-    const [lastName, setLastName] = useState();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState(); 
     const [itsOk, setItsOk] = useState(false);
@@ -26,11 +35,10 @@ const SigninForm = ({setToken}) => {
 		e.preventDefault();
         setIsRequest(true);
 		const data = await registerUser({
-            firstName,
-            lastName,
+            name: firstName,
 			email,
 		  	password,
-            isStudent: true
+            isTeacher: value === 'teacher' ? true : false
 		});
 
 		if (data?.status === 500){
@@ -38,11 +46,10 @@ const SigninForm = ({setToken}) => {
 			e.target.reset(); 
 		}
 		else{
-			setToken(data.token);
+			setToken("data.token");
             setItsOk(true);
 		}
         setIsRequest(false);
-		
 	}
 
     useEffect(() => {
@@ -68,10 +75,18 @@ const SigninForm = ({setToken}) => {
                     </label>
                 </div>
                 <div className="email input">
-                    <label>
-                        <p>Фамилия</p>
-                        <input type="text" onChange={e => setLastName(e.target.value)}/>
-                    </label>
+                <FormControl>
+                    <p>Вы учитель?</p>
+                    <RadioGroup
+                        aria-labelledby="demo-controlled-radio-buttons-group"
+                         name="controlled-radio-buttons-group"
+                        value={value}
+                        onChange={handleChange}
+                    >
+                    <FormControlLabel value="teacher" control={<Radio />} label="Да" />
+                    <FormControlLabel value="student" control={<Radio />} label="Нет" />
+                    </RadioGroup>
+                </FormControl>
                 </div>
                 <div className="email input">
                     <label>
@@ -92,9 +107,9 @@ const SigninForm = ({setToken}) => {
                     </ThemeProvider>
                     
                 </div>
-                <BasicModal isOpen={itsOk} 
+                <InformModal isOpen={itsOk} 
                 header={'Регистрация прошла успешно.'} 
-                text={'Авторизуйтесь для начала обучения, пожалуйста.'}/>
+                text={'Авторизуйтесь для начала работы, пожалуйста.'}/>
                 {errorMessage}
             </form>
         </div>

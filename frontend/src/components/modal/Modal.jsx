@@ -53,4 +53,35 @@ const BasicModal = ({isOpen, header, text, handler}) => {
     );
 }
 
+export const InformModal = ({isOpen, header, text}) => {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  
+  useEffect(()=>{
+      setOpen(isOpen);
+  }, [isOpen]);
+
+  
+  return (
+    <div>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            {header}
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            {text}
+          </Typography>
+        </Box>
+      </Modal>
+    </div>
+  );
+}
+
 export default BasicModal;

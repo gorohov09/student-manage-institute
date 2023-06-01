@@ -9,4 +9,6 @@ export class UserRegisterDto {
 
 	@IsString({ message: 'Не указано имя' })
 	name: string;
+
+	isTeacher: boolean;
 }

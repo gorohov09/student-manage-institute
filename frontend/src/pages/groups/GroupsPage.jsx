@@ -29,7 +29,7 @@ const GroupsPage = ({setIsAuth}) => {
                     </div>
 
                     <div className="table">
-                        <GroupList />
+                        <GroupList isTeacher={true}/>
                     </div>
                         
                 </div>

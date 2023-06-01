@@ -2,8 +2,8 @@ import {useHttp} from '../hooks/http.hook';
 
 const useInstituteService = () => {
 
-    const {request, error, clearError} = useHttp();
-    const _apiBase = 'http://localhost:80/api/';
+    const {request, setError, clearError} = useHttp();
+    const _apiBase = 'http://localhost:8000/api/';
 
     const getToken = () => {
         const tokenString = sessionStorage.getItem('token');
@@ -71,8 +71,18 @@ const useInstituteService = () => {
         return res;
     }
 
+    const loginUser = async (info) => {
+        const url = `${_apiBase}users/login`
+        return await request(url, 'POST', JSON.stringify(info), {'Content-Type': 'application/json'});
+    }
 
-    return {error,
+    const registerUser = async (info) => {
+        const url = `${_apiBase}users/register`
+        return await request(url, 'POST', JSON.stringify(info), {'Content-Type': 'application/json'});
+    }
+
+
+    return {setError,
         clearError, 
         getToken, 
         getAllGroups,
@@ -85,7 +95,9 @@ const useInstituteService = () => {
         updateGroup,
         updateStudent,
         getGroupByIdWithoutStudent,
-        getStudentById
+        getStudentById,
+        loginUser,
+        registerUser
     }
 }
 

@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom'
 
 import "./sidebar.scss"
 
-const Sidebar = () => {
+const Sidebar = ({isTeacher}) => {
     return (
         <div className="sidebar">
             <div className="top">
-                <Link to="/"><span className="logo">Учет студентов</span></Link>
+                {isTeacher === undefined ? <Link to="/"><span className="logo">Учет студентов</span></Link> : <span>Учет студентов</span>}
             </div>
             <hr></hr>
             <div className="center">
@@ -16,11 +16,11 @@ const Sidebar = () => {
                     <p className="title">ОСНОВНАЯ ИНФОМРАЦИЯ</p>
                     <li>
                         <AccountCircleIcon className='icon' />
-                        <Link to="/students"><span>Студенты</span></Link>
+                        {isTeacher === undefined ? <Link to="/students"><span>Студенты</span></Link> : <span>Студенты</span>}
                     </li>
                     <li>
                         <MenuBookIcon className='icon' />
-                        <Link to="/groups"><span>Группы</span></Link>
+                        {isTeacher === undefined ? <Link to="/groups"><span>Группы</span></Link> : <span>Группы</span>}
                     </li>
                 </ul>
             </div>

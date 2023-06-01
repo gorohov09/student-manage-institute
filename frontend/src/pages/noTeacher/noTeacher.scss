@@ -1,0 +1,25 @@
+.groupsTable {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    .operation {
+        margin-bottom: 20px;
+        button {
+            color: rgb(126, 0, 189);
+            font-size: 18px;
+        }
+
+        a {
+            text-decoration: none;
+            color: rgb(126, 0, 189);
+            font-size: 18px;
+        }
+    }
+
+    .table {
+        display: flex;
+        justify-content: center;
+    }
+}

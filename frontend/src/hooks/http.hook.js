@@ -24,5 +24,5 @@ export const useHttp = () => {
 
     const clearError = () => setError(null);
 
-    return {request, error, clearError};
+    return {request, setError, clearError};
 }
