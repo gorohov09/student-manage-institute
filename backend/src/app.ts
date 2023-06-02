@@ -30,7 +30,7 @@ export class App {
 	) {
 		this.app = express();
 		this.port = 8000;
-		this.urlDatabase = 'mongodb://127.0.0.1:27017/instituteDb';
+		this.urlDatabase = 'mongodb://moongodb:27017/instituteDb';
 	}
 
 	useMiddleware(): void {
