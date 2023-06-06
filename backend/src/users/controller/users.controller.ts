@@ -60,7 +60,12 @@ export class UserController extends BaseController implements IUserController {
 		console.log(jwt);
 		console.log(result);
 
-		this.ok(res, { result: result.success, token: jwt, isTeacher: result.isTeacher });
+		this.ok(res, {
+			result: result.success,
+			token: jwt,
+			isTeacher: result.isTeacher,
+			isAdmin: result.isAdmin,
+		});
 	}
 
 	async register(

@@ -15,7 +15,7 @@ import useInstituteService from '../../services/InstituteService';
 import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material';
 import { CheckBox } from '@mui/icons-material';
 
-const SigninForm = ({setToken}) => {
+const SigninForm = ({setToken, isTeacher}) => {
     const {registerUser, error, clearError} = useInstituteService();
     const navigate = useNavigate();
 
@@ -38,7 +38,7 @@ const SigninForm = ({setToken}) => {
             name: firstName,
 			email,
 		  	password,
-            isTeacher: value === 'teacher' ? true : false
+            isTeacher: isTeacher
 		});
 
 		if (data?.status === 500){
@@ -74,20 +74,7 @@ const SigninForm = ({setToken}) => {
                         <input type="text" onChange={e => setFirstName(e.target.value)}/>
                     </label>
                 </div>
-                <div className="email input">
-                <FormControl>
-                    <p>Вы учитель?</p>
-                    <RadioGroup
-                        aria-labelledby="demo-controlled-radio-buttons-group"
-                         name="controlled-radio-buttons-group"
-                        value={value}
-                        onChange={handleChange}
-                    >
-                    <FormControlLabel value="teacher" control={<Radio />} label="Да" />
-                    <FormControlLabel value="student" control={<Radio />} label="Нет" />
-                    </RadioGroup>
-                </FormControl>
-                </div>
+
                 <div className="email input">
                     <label>
                         <p>Почта</p>
@@ -109,7 +96,7 @@ const SigninForm = ({setToken}) => {
                 </div>
                 <InformModal isOpen={itsOk} 
                 header={'Регистрация прошла успешно.'} 
-                text={'Авторизуйтесь для начала работы, пожалуйста.'}/>
+                text={isTeacher ? "Преподаватель добавлен" : 'Авторизуйтесь для начала работы, пожалуйста.'}/>
                 {errorMessage}
             </form>
         </div>

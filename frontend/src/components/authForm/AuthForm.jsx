@@ -32,7 +32,7 @@ const AuthForm = ({setToken, setIsAuth}) => {
                     </ThemeProvider>
                 </div>
                 
-                {isLoginForm ? <LoginForm setToken={setToken} setIsAuth={setIsAuth}/> : <SigninForm setToken={setToken}/>}
+                {isLoginForm ? <LoginForm setToken={setToken} setIsAuth={setIsAuth}/> : <SigninForm setToken={setToken} isTeacher={false}/>}
                 
             </div>
         </div>

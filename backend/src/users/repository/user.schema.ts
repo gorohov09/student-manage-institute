@@ -5,6 +5,7 @@ interface UserShema {
 	email: string;
 	password: string;
 	isTeacher: boolean;
+	isAdmin: boolean;
 }
 
 const schema = new Schema<UserShema>({
@@ -12,6 +13,7 @@ const schema = new Schema<UserShema>({
 	email: { type: String, required: true },
 	password: { type: String, required: true },
 	isTeacher: { type: Boolean, required: true },
+	isAdmin: { type: Boolean, required: true },
 });
 
 const UserModel = model<UserShema>('User', schema);

@@ -29,12 +29,14 @@ export class UserService implements IUserService {
 
 	async loginUser({ email, password }: UserLoginDto): Promise<LoginResult> {
 		const user = await this.userRepository.getByEmail(email);
+		console.log(user);
 		const loginResult = new LoginResult();
 
 		if (user) {
 			const res = await compare(password, user.password);
 			if (res) {
 				loginResult.isTeacher = user.isTeacher;
+				loginResult.isAdmin = user.isAdmin;
 				loginResult.success = true;
 				return loginResult;
 			}

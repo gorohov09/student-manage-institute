@@ -31,6 +31,9 @@ const LoginForm = ({setToken, setIsAuth}) => {
 			setIsAuth(true);
             if (data.isTeacher)
 			    navigate("/");
+            else if (data.isAdmin) {
+                navigate("/admin")
+            }
             else
                 navigate("/noTeacher")
 		}

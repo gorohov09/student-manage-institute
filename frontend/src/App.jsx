@@ -10,6 +10,7 @@ import AddStudentPage from "./pages/addStudent/AddStudentPage";
 import UpdateGroupPage from "./pages/updateGroup/UpdateGroupPage";
 import UpdateStudentPage from "./pages/updateStudent/UpdateStudent";
 import NoTeacher from "./pages/noTeacher/NoTeacher";
+import AdminPage from "./pages/admin/AdminPage";
 
 function App() {
 	const { token, setToken } = useToken();
@@ -36,6 +37,7 @@ function App() {
 			<Route path="/groupUpdate/:groupId" element={<UpdateGroupPage setIsAuth={setIsAuth}/>}/>
 			<Route path="/studentUpdate/:studentId/:groupId" element={<UpdateStudentPage setIsAuth={setIsAuth}/>}/>
 			<Route path="/noTeacher" element={<NoTeacher setIsAuth={setIsAuth}/>}/>
+			<Route path="/admin" element={<AdminPage setToken={setToken} setIsAuth={setIsAuth}/>}/>
 		</Routes>
     </div>
   );

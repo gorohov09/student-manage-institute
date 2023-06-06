@@ -11,6 +11,7 @@ export class UserRepository implements IUserRepository {
 			email: user.email,
 			password: user.password,
 			isTeacher: user.isTeacher,
+			isAdmin: false,
 		});
 
 		await userEntity.save();

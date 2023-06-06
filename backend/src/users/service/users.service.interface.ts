@@ -5,6 +5,7 @@ import { User } from '../user.entity';
 export class LoginResult {
 	success: boolean;
 	isTeacher: boolean;
+	isAdmin: boolean;
 }
 
 export interface IUserService {
